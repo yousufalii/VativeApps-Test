@@ -9,9 +9,9 @@ const createNewTodo = require("../server/controllers/createNewTodo");
 const getTodos = require("../server/controllers/getTodos");
 const updateTodos = require("../server/controllers/updateTodo");
 const deleteTodos = require("../server/controllers/deleteTodo");
-const socketIO = require('socket.io');
-const http = require('http');
-const path = require('path');
+const socketIO = require("socket.io");
+const http = require("http");
+const path = require("path");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -65,14 +65,14 @@ const httpServer = http.createServer(app);
 
 const io = socketIO(httpServer);
 
-io.on('connection', (socket) => {
-  socket.on('chat message', msg => {
-    io.emit('chat message', msg);
+io.on("connection", (socket) => {
+  socket.on("chat message", (msg) => {
+    io.emit("chat message", msg);
   });
 });
 
 app.get("/", authMiddleware, (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 httpServer.listen(port, () => {
